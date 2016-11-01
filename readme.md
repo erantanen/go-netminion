@@ -8,7 +8,11 @@
 go-netminion 
 =====
 
+GET /repos/:owner/:repo/contents/:path
+
 .. contents::
+
+
 
 What is go-netminion?
 --------------
