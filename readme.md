@@ -5,9 +5,8 @@
 go-netminion 
 =====
 
-GET /repos/:owner/:repo/contents/:path
 
-.. Contents::
+.. contents::
 
 
 
