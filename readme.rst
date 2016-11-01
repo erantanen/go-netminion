@@ -22,7 +22,7 @@ will be built as a series of modules that can be used singularly or together.
 Installation
 ------------
 
-For installation instructions, see ``INSTALL.rst.txt``.
+For installation instructions, see ``install.rst``.
 
 
 Documentation
@@ -32,7 +32,7 @@ go-netminion documentation is available on the web:
 
     not yet?
 
-How to generate the HTML documentation, see ``doc/README.txt``.
+How to generate the HTML documentation, see ``doc/readme.rst``.
 
 
 
