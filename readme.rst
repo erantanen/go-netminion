@@ -1,6 +1,3 @@
-
-
-
 =====
 go-netminion 
 =====
@@ -14,9 +11,8 @@ What is go-netminion?
 --------------
 
 go-netminion is an open-source project that can have a broad spectrum of uses, 
-from network/software trouble shooting to use as a security device . This project
+from network/software troubleshooting to use as a security device. This project
 will be built as a series of modules that can be used singularly or together.
-
 
 
 Installation
@@ -51,7 +47,7 @@ They can be downloaded as a zip file or using the Git client.
 Bug reports
 -----------
 
-To search for bugs or report them, please use the Scipy Bug Tracker at:
+To search for bugs or report them, please use the GitHub tracker at:
 
     https://github.com/erantanen/go-netminion/issues
 
