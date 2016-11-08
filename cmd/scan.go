@@ -30,29 +30,37 @@ var scanCmd = &cobra.Command{
 		// Loop through all possible entry points
 		c := make(chan entrypoint)
 		for _, address := range addresses {
-			go func(a string) {
-				for _, port := range ports {
-					c <- scan(a, port)
-				}
-			}(address)
+			for _, port := range ports {
+				go func(a string, p int) {
+					c <- scan(a, p)
+				}(address, port)
+			}
 		}
 
 		// Loop until we timeout or receive all possible responses
 		l := len(addresses) * len(ports)
-		timeout := time.Second * time.Duration(5*l)
+		t := 0
+		d := duration(timeout)
+		start := time.Now()
 		for i := 0; i < l; i++ {
 			select {
 			case r := <-c:
+				t++
 				status := "Closed"
 				if r.Open {
 					status = "Opened"
 				}
-
 				fmt.Printf("[ %s ] Host: %s, Port: %d\n", status, r.Address, r.Port)
-			case <-time.After(timeout):
+			case <-time.After(d):
 				// Timeout
 			}
 		}
+
+		fmt.Printf("\nRecieved %d responses out of %d (%.2f%%) possibilities %s\n",
+			t,
+			l,
+			(float64(t)/float64(l))*100,
+			time.Now().Sub(start))
 	},
 }
 
@@ -99,6 +107,17 @@ func explodeAddresses(expressions ...string) []string {
 	}
 
 	return addresses
+}
+
+//duration  helps parse user input in to a meaningful value
+func duration(timeout string) time.Duration {
+	if ms, err := strconv.Atoi(timeout); err == nil {
+		return time.Millisecond * time.Duration(ms)
+	} else if d, err := time.ParseDuration(timeout); err == nil {
+		return d
+	}
+
+	return time.Duration(time.Millisecond * 50)
 }
 
 // scan a single host and port and return the results
